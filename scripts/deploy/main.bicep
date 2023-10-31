@@ -94,7 +94,7 @@ var uniqueName = '${name}-${rgIdHash}'
 var storageFileShareName = 'aciqdrantshare'
 
 resource openAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = if (deployNewAzureOpenAI) {
-  name: 'ai-${uniqueName}'
+  name: 'openai-${uniqueName}'
   location: location
   kind: 'OpenAI'
   sku: {
@@ -716,7 +716,7 @@ resource appInsightExtensionWebSearchPlugin 'Microsoft.Web/sites/siteextensions@
 }
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
-  name: 'la-${uniqueName}'
+  name: 'law-${uniqueName}'
   location: location
   tags: {
     displayName: 'Log Analytics'
@@ -825,14 +825,14 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   properties: {
     addressSpace: {
       addressPrefixes: [
-        '10.0.0.0/16'
+        '192.168.24.0/22'
       ]
     }
     subnets: [
       {
         name: 'webSubnet'
         properties: {
-          addressPrefix: '10.0.1.0/24'
+          addressPrefix: '192.168.24.0/24'
           networkSecurityGroup: {
             id: webNsg.id
           }
@@ -859,7 +859,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-05-01' = {
       {
         name: 'qdrantSubnet'
         properties: {
-          addressPrefix: '10.0.2.0/24'
+          addressPrefix: '192.168.25.0/24'
           networkSecurityGroup: {
             id: qdrantNsg.id
           }
@@ -886,7 +886,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-05-01' = {
       {
         name: 'postgresSubnet'
         properties: {
-          addressPrefix: '10.0.3.0/24'
+          addressPrefix: '192.168.26.0/24'
           serviceEndpoints: []
           delegations: []
           privateEndpointNetworkPolicies: 'Disabled'

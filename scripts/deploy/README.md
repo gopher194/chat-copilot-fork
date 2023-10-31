@@ -100,7 +100,7 @@ The examples below assume you are using an existing Azure OpenAI resource. See t
 ## PowerShell
 
 ```powershell
-./deploy-azure.ps1 -Subscription {YOUR_SUBSCRIPTION_ID} -DeploymentName {YOUR_DEPLOYMENT_NAME} -AIService {AzureOpenAI or OpenAI} -AIApiKey {YOUR_AI_KEY} -AIEndpoint {YOUR_AZURE_OPENAI_ENDPOINT} -BackendClientId {YOUR_BACKEND_APPLICATION_ID} -FrontendClientId {YOUR_FRONTEND_APPLICATION_ID} -TenantId {YOUR_TENANT_ID}
+./deploy-azure.ps1 -Subscription {SUBSCRIPTION_ID} -DeploymentName {DEPLOYMENT_NAME} -AIService {AzureOpenAI or OpenAI} -AIApiKey {AI_KEY} -AIEndpoint {AZURE_OPENAI_ENDPOINT} -BackendClientId {BACKEND_APPLICATION_ID} -FrontendClientId {FRONTEND_APPLICATION_ID} -TenantId {TENANT_ID}
 ```
 
 - To use an existing Azure OpenAI resource, set `-AIService` to `AzureOpenAI` and include `-AIApiKey` and `-AIEndpoint`.
@@ -111,7 +111,7 @@ The examples below assume you are using an existing Azure OpenAI resource. See t
 
 ```bash
 chmod +x ./deploy-azure.sh
-./deploy-azure.sh --subscription {YOUR_SUBSCRIPTION_ID} --deployment-name {YOUR_DEPLOYMENT_NAME} --ai-service {AzureOpenAI or OpenAI} --ai-service-key {YOUR_AI_KEY} --ai-endpoint {YOUR_AZURE_OPENAI_ENDPOINT} --client-id {YOUR_BACKEND_APPLICATION_ID} --frontend-client-id {YOUR_FRONTEND_APPLICATION_ID} --tenant-id {YOUR_TENANT_ID}
+./deploy-azure.sh --subscription {SUBSCRIPTION_ID} --deployment-name {DEPLOYMENT_NAME} --ai-service {AzureOpenAI or OpenAI} --ai-service-key {AI_KEY} --ai-endpoint {AZURE_OPENAI_ENDPOINT} --client-id {BACKEND_APPLICATION_ID} --frontend-client-id {FRONTEND_APPLICATION_ID} --tenant-id {TENANT_ID}
 ```
 
 - To use an existing Azure OpenAI resource, set `--ai-service` to `AzureOpenAI` and include `--ai-service-key` and `--ai-endpoint`.
@@ -137,7 +137,7 @@ To deploy the application, first package it, then deploy it to the Azure resourc
 ```powershell
 ./package-webapi.ps1
 
-./deploy-webapi.ps1 -Subscription {YOUR_SUBSCRIPTION_ID} -ResourceGroupName {YOUR_RESOURCE_GROUP_NAME} -DeploymentName {YOUR_DEPLOYMENT_NAME}
+./deploy-webapi.ps1 -Subscription {SUBSCRIPTION_ID} -ResourceGroupName {RESOURCE_GROUP_NAME} -DeploymentName {DEPLOYMENT_NAME}
 ```
 
 ## Bash
@@ -147,7 +147,7 @@ chmod +x ./package-webapi.sh
 ./package-webapi.sh
 
 chmod +x ./deploy-webapi.sh
-./deploy-webapi.sh --subscription {YOUR_SUBSCRIPTION_ID} --resource-group {YOUR_RESOURCE_GROUP_NAME} --deployment-name {YOUR_DEPLOYMENT_NAME}
+./deploy-webapi.sh --subscription {SUBSCRIPTION_ID} --resource-group {RESOURCE_GROUP_NAME} --deployment-name {DEPLOYMENT_NAME}
 ```
 
 # Deploy Hosted Plugins
@@ -165,7 +165,7 @@ To deploy the plugins, build the packages first and deploy them to the Azure res
 ```powershell
 ./package-plugins.ps1
 
-./deploy-plugins.ps1 -Subscription {YOUR_SUBSCRIPTION_ID} -ResourceGroupName rg-{YOUR_DEPLOYMENT_NAME} -DeploymentName {YOUR_DEPLOYMENT_NAME}
+./deploy-plugins.ps1 -Subscription {SUBSCRIPTION_ID} -ResourceGroupName rg-{DEPLOYMENT_NAME} -DeploymentName {DEPLOYMENT_NAME}
 ```
 
 ## Bash
@@ -175,7 +175,7 @@ chmod +x ./package-plugins.sh
 ./package-webapi.sh
 
 chmod +x ./deploy-plugins.sh
-./deploy-webapi.sh --subscription {YOUR_SUBSCRIPTION_ID} --resource-group rg-{YOUR_DEPLOYMENT_NAME} --deployment-name {YOUR_DEPLOYMENT_NAME}
+./deploy-webapi.sh --subscription {SUBSCRIPTION_ID} --resource-group rg-{DEPLOYMENT_NAME} --deployment-name {DEPLOYMENT_NAME}
 ```
 
 # (Optional) Deploy Memory Pipeline
@@ -191,7 +191,7 @@ To deploy the memorypipeline, build the deployment package first and deploy it t
 ```powershell
 .\package-memorypipeline.ps1
 
-.\deploy-memorypipeline.ps1 -Subscription {YOUR_SUBSCRIPTION_ID} -ResourceGroupName {YOUR_RESOURCE_GROUP_NAME} -DeploymentName {YOUR_DEPLOYMENT_NAME}
+.\deploy-memorypipeline.ps1 -Subscription {SUBSCRIPTION_ID} -ResourceGroupName {RESOURCE_GROUP_NAME} -DeploymentName {DEPLOYMENT_NAME}
 ```
 
 ## Bash
@@ -201,7 +201,7 @@ chmod +x ./package-memorypipeline.sh
 ./package-memorypipeline.sh
 
 chmod +x ./deploy-memorypipeline.sh
-./deploy-memorypipeline.sh --subscription {YOUR_SUBSCRIPTION_ID} --resource-group {YOUR_RESOURCE_GROUP_NAME} --deployment-name {YOUR_DEPLOYMENT_NAME}
+./deploy-memorypipeline.sh --subscription {SUBSCRIPTION_ID} --resource-group {RESOURCE_GROUP_NAME} --deployment-name {DEPLOYMENT_NAME}
 ```
 
 Your Chat Copilot application is now deployed!
@@ -218,9 +218,9 @@ This will get you to the CORS page where you can add your allowed hosts.
 ### PowerShell
 
 ```powershell
-$webApiName = $(az deployment group show --name {DEPLOYMENT_NAME} --resource-group {YOUR_RESOURCE_GROUP_NAME} --output json | ConvertFrom-Json).properties.outputs.webapiName.value
+$webApiName = $(az deployment group show --name {DEPLOYMENT_NAME} --resource-group {RESOURCE_GROUP_NAME} --output json | ConvertFrom-Json).properties.outputs.webapiName.value
 
-az webapp cors add --name $webapiName --resource-group $ResourceGroupName --subscription $Subscription --allowed-origins YOUR_FRONTEND_URL
+az webapp cors add --name $webapiName --resource-group $ResourceGroupName --subscription $Subscription --allowed-origins FRONTEND_URL
 ```
 
 ### Bash
@@ -228,5 +228,5 @@ az webapp cors add --name $webapiName --resource-group $ResourceGroupName --subs
 ```bash
 eval WEB_API_NAME=$(az deployment group show --name $DEPLOYMENT_NAME --resource-group $RESOURCE_GROUP --output json) | jq -r '.properties.outputs.webapiName.value'
 
-az webapp cors add --name $WEB_API_NAME --resource-group $RESOURCE_GROUP --subscription $SUBSCRIPTION --allowed-origins YOUR_FRONTEND_URL
+az webapp cors add --name $WEB_API_NAME --resource-group $RESOURCE_GROUP --subscription $SUBSCRIPTION --allowed-origins FRONTEND_URL
 ```

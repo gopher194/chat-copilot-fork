@@ -101,6 +101,7 @@ public sealed class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseStatusCodePages(); // To get more error details in the Response body
 
             // Redirect root URL to Swagger UI URL
             app.MapWhen(

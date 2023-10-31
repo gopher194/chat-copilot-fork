@@ -1,5 +1,9 @@
-### emberger additions:
+### gopher194 additions:
+#### Don't check-in my secrets
 **/*_secret.*
+#### Don't check-in local folders
+webapi/tmp-cache/**
+webapi/tmp-database/**
 
 
 #### Original from fork:
